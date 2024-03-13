@@ -17,7 +17,21 @@
 ;;;;;;;; START OF SOLUTION ;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; Zde doplnte vase reseni
+(assert (and (<= D 0) (<= E 0)))
+
+(declare-fun x () Int)
+(declare-fun y () Int)
+(declare-fun z () Int)
+
+; x = A * B * 2
+
+(assert (ite (< x E) (= y (+ x (* 5 B))) (= y (- x C))))
+
+(assert(ite (< (+ y 2) D) (= z (- (* x A) (* y B)))(= z (+ (* x B) (* y A)))))
+
+(assert (ite (< z (+ E D)) true false))
+
+; TODO E+D = lowest possible
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;; END OF SOLUTION ;;;;;;;;;;;
