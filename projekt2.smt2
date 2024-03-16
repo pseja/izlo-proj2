@@ -17,21 +17,49 @@
 ;;;;;;;; START OF SOLUTION ;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(assert (and (<= D 0) (<= E 0)))
+; if ((D <= 0) or (E <= 0)) {return false;}
+(assert (and (> D 0) (> E 0)))
 
-(declare-fun x () Int)
-(declare-fun y () Int)
-(declare-fun z () Int)
+; int x, y, z;
+(declare-fun x () Int) (declare-fun y () Int) (declare-fun z () Int)
 
-; x = A * B * 2
+; x = A * B * 2;
+(assert (= x (* A B 2)))
 
-(assert (ite (< x E) (= y (+ x (* 5 B))) (= y (- x C))))
+; x < E
+(assert (ite (< x E)
+                (= y (+ x (* 5 B))) ; x < E == true  -> y = 5*B + x
+                (= y (- x C))))     ; x < E == false -> y = x - C
 
-(assert(ite (< (+ y 2) D) (= z (- (* x A) (* y B)))(= z (+ (* x B) (* y A)))))
+; (y + 2) < D
+(assert (ite (< (+ y 2) D) 
+                (= z (- (* x A) (* y B)))   ; y+2 < D == true  -> z = x*A - y*B
+                (= z (+ (* x B) (* y A))))) ; y+2 < D == false -> z = x*B + y*A
 
-(assert (ite (< z (+ E D)) true false))
+; z >= (E + D) == false
+(assert (< z (+ E D)))
 
-; TODO E+D = lowest possible
+; E + D lowest possible
+(assert
+  (forall ((D1 Int) (E1 Int) (x1 Int) (y1 Int) (z1 Int))
+    (=>
+        (and
+            (> D1 0)
+            (> E1 0)
+            (= x1 (* A B 2))
+            (ite (< x1 E1) 
+                    (= y1 (+ x1 (* 5 B)))
+                    (= y1 (- x1 C))
+            )
+            (ite (< (+ y1 2) D1)
+                    (= z1 (- (* x1 A) (* y1 B)))
+                   (= z1 (+ (* x1 B) (* y1 A)))
+           )
+            (< z1 (+ E1 D1))
+        ) (<= (+ D E) (+ D1 E1))
+   )
+  )
+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;; END OF SOLUTION ;;;;;;;;;;;
