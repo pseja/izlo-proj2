@@ -1,4 +1,8 @@
 # IZLO – Projekt 2: SMT solvery
+
+### Výsledné hodnocení
+(10/10)
+
 ## Úvod
 Hodiny na vašem monitoru poskočí na 23:55. Odevzdání projektu se nezadržitelně blíží a váš kolega stále nedokončil implementaci funkce, na které závisí funkčnost celého zbytku programu. Zuřivě refreshujete github v prohlížeči a konečně se v repozitáři objeví soubor `foo.c` s funkcí `f`. Na první pohled není jasné co funkce dělá a váš kolega s vámi nekomunikuje. Vaše situace je komplikována faktem, že pro optimální funkčnost vašeho programu potřebujete volat funkci f s co nejmenšími vstupy tak, aby vrátila `true`. Nezbývá vám nic jiného než poslední minuty do deadlinu využít k analyzování funkce pomocí SMT solveru.
 
